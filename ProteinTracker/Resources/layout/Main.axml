@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:orientation="horizontal"
+    p1:minWidth="25px"
+    p1:minHeight="25px"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/linearLayout1"
+    p1:background="@drawable/ic_background">
+    <TableLayout
+        p1:layout_width="wrap_content"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/tableLayout1"
+        p1:stretchColumns="1"
+        p1:layout_gravity="center">
+        <TableRow
+            p1:id="@+id/tableRow1"
+            p1:layout_weight="1">
+            <ImageButton
+                p1:src="@drawable/ic_searchbutton"
+                p1:layout_column="0"
+                p1:id="@+id/searchButton"
+                p1:scaleType="centerInside"
+                p1:layout_width="wrap_content"
+                p1:layout_height="200dp"
+                p1:layout_weight="1"
+                p1:layout_gravity="top" />
+            <ImageButton
+                p1:src="@drawable/ic_myinventory"
+                p1:layout_column="1"
+                p1:id="@+id/myInventoryButton"
+                p1:scaleType="centerInside"
+                p1:layout_weight="1"
+                p1:layout_gravity="top"
+                p1:layout_width="wrap_content"
+                p1:layout_height="200dp" />
+        </TableRow>
+        <TableRow
+            p1:id="@+id/tableRow2">
+            <TextView
+                p1:text="Search"
+                p1:layout_column="0"
+                p1:id="@+id/searchTxt"
+                p1:layout_gravity="top"
+                p1:textSize="25sp"
+                p1:textStyle="bold"
+                p1:layout_width="wrap_content"
+                p1:layout_height="wrap_content"
+                p1:layout_weight="1"
+                p1:textColor="#ff212121"
+                p1:shadowColor="#fffafafa"
+                p1:shadowDx="1.0"
+                p1:shadowDy="1.0"
+                p1:shadowRadius="2.0"
+                p1:paddingLeft="20dp" />
+            <TextView
+                p1:text="My Inventory"
+                p1:layout_column="1"
+                p1:id="@+id/myInventoryTxt"
+                p1:layout_gravity="top"
+                p1:textSize="25sp"
+                p1:layout_width="wrap_content"
+                p1:layout_height="wrap_content"
+                p1:layout_weight="1"
+                p1:textStyle="bold"
+                p1:textColor="#ff212121"
+                p1:shadowColor="#fffafafa"
+                p1:shadowDx="1.0"
+                p1:shadowDy="1.0"
+                p1:shadowRadius="2.0"
+                p1:paddingLeft="20dp" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

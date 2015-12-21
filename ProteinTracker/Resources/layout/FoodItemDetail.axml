@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_background">
+    <TextView
+        android:text="Brand Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/brandTxtView" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/brndNameEditTxt" />
+    <TextView
+        android:text="Product Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/prdNameTxtView"
+        android:paddingTop="25dp" />
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/prdNameEditTxt" />
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tableLayout1"
+        android:stretchColumns="*">
+        <TableRow
+            android:id="@+id/tableRow1">
+            <TextView
+                android:text="Protein"
+                android:layout_column="0"
+                android:id="@+id/prtnTxtView"
+                android:paddingTop="25dp" />
+            <TextView
+                android:text="Calories (per serving)"
+                android:layout_column="1"
+                android:id="@+id/calTxtView"
+                android:paddingTop="25dp" />
+        </TableRow>
+        <TableRow
+            android:id="@+id/tableRow2">
+            <EditText
+                android:inputType="number"
+                android:layout_column="0"
+                android:id="@+id/prtnEditTxt"
+                android:maxLength="4" />
+            <EditText
+                android:inputType="number"
+                android:layout_column="1"
+                android:id="@+id/calEditTxt"
+                android:maxLength="5" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
