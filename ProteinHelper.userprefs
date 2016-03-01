@@ -1,0 +1,20 @@
+﻿<Properties StartupItem="ProteinTracker/ProteinHelper.csproj" RefactoringSettings.EnableRefactorings="True">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.D025A0A0237207NQ" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="ProteinTracker/InventoryActivity.cs">
+    <Files>
+      <File FileName="ProteinTracker/InventoryActivity.cs" Line="22" Column="1" />
+      <File FileName="ProteinTracker/NutritionixService.cs" Line="1" Column="1" />
+      <File FileName="ProteinTracker/InventoryAdapter.cs" Line="1" Column="1" />
+      <File FileName="ProteinTracker/InventoryService.cs" Line="1" Column="1" />
+      <File FileName="ProteinTracker/Resources/values/Styles.xml" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches>
+    <Watch file="ProteinTracker/FoodItemDetail.cs" line="158" offsetX="679" offsetY="2320" expression="currentFoodItem.UPC" liveUpdate="False" />
+    <Watch file="ProteinTracker/FoodItemDetail.cs" line="153" offsetX="690" offsetY="2280" expression="currentFoodItem.UPC" liveUpdate="False" />
+  </MonoDevelop.Ide.DebuggingService.PinnedWatches>
+  <MonoDevelop.Ide.ItemProperties.ProteinHelper AndroidDesignerPreferredDevice="Nexus 4" />
+</Properties>

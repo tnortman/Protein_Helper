@@ -1,0 +1,1 @@
+<resources><style name="Theme.Splash" parent="android:Theme"><item name="android:windowBackground">@drawable/splashbg</item><item name="android:windowNoTitle">true</item><item name="android:gravity">center</item></style></resources>

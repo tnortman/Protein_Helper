@@ -1,0 +1,703 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Nutritionix</name>
+    </assembly>
+    <members>
+        <member name="T:Nutritionix.Allergen">
+            <summary>
+            Types of food allergens
+            </summary>
+        </member>
+        <member name="F:Nutritionix.Allergen.Milk">
+            <summary>
+            Contains milk
+            </summary>
+        </member>
+        <member name="F:Nutritionix.Allergen.Eggs">
+            <summary>
+            Contains eggs
+            </summary>
+        </member>
+        <member name="F:Nutritionix.Allergen.Fish">
+            <summary>
+            Contains fish
+            </summary>
+        </member>
+        <member name="F:Nutritionix.Allergen.Shellfish">
+            <summary>
+            Contains shellfish
+            </summary>
+        </member>
+        <member name="F:Nutritionix.Allergen.TreeNuts">
+            <summary>
+            Contains tree nuts
+            </summary>
+        </member>
+        <member name="F:Nutritionix.Allergen.Peanuts">
+            <summary>
+            Contains peanuts
+            </summary>
+        </member>
+        <member name="F:Nutritionix.Allergen.Wheat">
+            <summary>
+            Contains wheat
+            </summary>
+        </member>
+        <member name="F:Nutritionix.Allergen.Soybeans">
+            <summary>
+            Contains soy
+            </summary>
+        </member>
+        <member name="F:Nutritionix.Allergen.Gluten">
+            <summary>
+            Contains gluten
+            </summary>
+        </member>
+        <member name="M:Nutritionix.Extensions.EnumExtensions.ToDescription(System.Enum)">
+            <summary>
+            Retrieves the DescriptionAttribute value from an enum value.
+            </summary>
+            <param name="value">The enum value</param>
+            <returns>The DescriptionAttribute value or if not defined, value.ToString()</returns>
+        </member>
+        <member name="M:Nutritionix.Extensions.ExpressionExtensions.ToJsonProperty``1(System.Linq.Expressions.Expression{System.Func{Nutritionix.Item,``0}})">
+            <summary>
+            Retrieves the name of the <see cref="T:Newtonsoft.Json.JsonPropertyAttribute"/> applied to the specified <see cref="T:Nutritionix.Item"/> property.
+            </summary>
+            <param name="itemPropertyExpression">The property.</param>
+            <returns>The JSON property name or null if none is defined.</returns>
+            <exception cref="T:System.ArgumentException"></exception>
+        </member>
+        <member name="T:Nutritionix.Brand">
+            <summary>
+            Nutritionix brand, representing a restaurant or manufacturer
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Brand.Id">
+            <summary>
+            Brand ID
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Brand.Name">
+            <summary>
+            Brand Name
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Brand.Website">
+            <summary>
+            Brand website
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Brand.LogoUrl">
+            <summary>
+            Url of the brand's logo
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Brand.Type">
+            <summary>
+            Brand Type
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Brand.Created">
+            <summary>
+            Date the brand was added to the Nutritionix database
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Brand.Updated">
+            <summary>
+            Date the brand was last updated in the Nutritionix database
+            </summary>
+        </member>
+        <member name="T:Nutritionix.INutritionixClient">
+            <summary>
+            Client interface for accessing the Nutritionix API
+            </summary>
+        </member>
+        <member name="M:Nutritionix.INutritionixClient.Initialize(System.String,System.String)">
+            <summary>
+            Sets the credentials to be used when querying the Nutritionix API.  Must be called before making any requests.
+            </summary>
+            <param name="appId">Your developer application id</param>
+            <param name="appKey">Your developer application key</param>
+        </member>
+        <member name="M:Nutritionix.INutritionixClient.SearchItems(Nutritionix.SearchRequest)">
+            <summary>
+            Searches Nutritionix for items matching the specified query.
+            </summary>
+            <param name="request">The query.</param>
+            <returns>The search response from the Nutritionix API.</returns>
+            <exception cref="T:Nutritionix.NutritionixException"/>
+        </member>
+        <member name="M:Nutritionix.INutritionixClient.SearchItems(Nutritionix.PowerSearchRequest)">
+            <summary>
+            Searches Nutritionix for items matching the specified query.
+            </summary>
+            <param name="request">The query.</param>
+            <returns>The search response from the Nutritionix API.</returns>
+            <exception cref="T:Nutritionix.NutritionixException"/>
+        </member>
+        <member name="M:Nutritionix.INutritionixClient.RetrieveItem(System.String)">
+            <summary>
+            Retrieves the specified item from Nutritionix
+            </summary>
+            <param name="id">The item id</param>
+            <returns>The requested item or null</returns>
+            <exception cref="T:Nutritionix.NutritionixException"></exception>
+        </member>
+        <member name="M:Nutritionix.INutritionixClient.RetrieveItemByUPC(System.String)">
+            <summary>
+            Retrieves the specified item from Nutritionix
+            </summary>
+            <param name="upc">The UPC</param>
+            <returns>The requested item or null</returns>
+            <exception cref="T:Nutritionix.NutritionixException"/>
+        </member>
+        <member name="M:Nutritionix.INutritionixClient.RetrieveBrand(System.String)">
+            <summary>
+            Retrieves the specified brand from Nutritionix
+            </summary>
+            <param name="id">The brand id</param>
+            <returns>The requested brand or null</returns>
+            <exception cref="T:Nutritionix.NutritionixException"/>
+        </member>
+        <member name="T:Nutritionix.NutritionixClient">
+            <summary>
+            Client for accessing the Nutritionix API
+            </summary>
+        </member>
+        <member name="M:Nutritionix.NutritionixClient.#ctor">
+            <summary>
+            Create a new instance of <see cref="T:Nutritionix.NutritionixClient"/>
+            </summary>
+        </member>
+        <member name="M:Nutritionix.NutritionixClient.#ctor(System.Func{System.Net.Http.HttpClient})">
+            <summary>
+            Create a new instance of <see cref="T:Nutritionix.NutritionixClient"/>
+            </summary>
+        </member>
+        <member name="M:Nutritionix.NutritionixClient.Initialize(System.String,System.String)">
+            <summary>
+            Sets the credentials to be used when querying the Nutritionix API.  Must be called before making any requests.
+            </summary>
+            <param name="appId">Your developer application id</param>
+            <param name="appKey">Your developer application key</param>
+        </member>
+        <member name="M:Nutritionix.NutritionixClient.SearchItems(Nutritionix.SearchRequest)">
+            <summary>
+            Searches Nutritionix for items matching the specified query.
+            </summary>
+            <param name="request">The query.</param>
+            <returns>The search response from the Nutritionix API.</returns>
+            <exception cref="T:Nutritionix.NutritionixException"/>
+        </member>
+        <member name="M:Nutritionix.NutritionixClient.SearchItems(Nutritionix.PowerSearchRequest)">
+            <summary>
+            Searches Nutritionix for items matching the specified query.
+            </summary>
+            <param name="request">The query.</param>
+            <returns>The search response from the Nutritionix API.</returns>
+            <exception cref="T:Nutritionix.NutritionixException"/>
+        </member>
+        <member name="M:Nutritionix.NutritionixClient.RetrieveItem(System.String)">
+            <summary>
+            Retrieves the specified item from the Nutritionix API
+            </summary>
+            <param name="id">The item id</param>
+            <returns>The requested item or null</returns>
+            <exception cref="T:Nutritionix.NutritionixException"/>
+        </member>
+        <member name="M:Nutritionix.NutritionixClient.RetrieveItemByUPC(System.String)">
+            <summary>
+            Retrieves the specified item from the Nutritionix API
+            </summary>
+            <param name="upc">The UPC</param>
+            <returns>The requested item or null</returns>
+            <exception cref="T:Nutritionix.NutritionixException"/>
+        </member>
+        <member name="M:Nutritionix.NutritionixClient.RetrieveBrand(System.String)">
+            <summary>
+            Retrieves the specified brand from the Nutritionix API
+            </summary>
+            <param name="id">The brand id</param>
+            <returns>The requested brand or null</returns>
+            <exception cref="T:Nutritionix.NutritionixException"/>
+        </member>
+        <member name="T:Nutritionix.Error">
+            <summary>
+            Nutritionix Error
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Error.Code">
+            <summary>
+            Error code
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Error.Message">
+            <summary>
+            Error message
+            </summary>
+        </member>
+        <member name="T:Nutritionix.NutritionixException">
+            <summary>
+            Thrown when the Nutritionix Client encounters any issue querying the Nutritionix API
+            <example>Unable to connect, json parse errors, 404 response, etc</example>
+            </summary>
+        </member>
+        <member name="M:Nutritionix.NutritionixException.#ctor(System.String)">
+            <summary>
+            Create a new <see cref="T:Nutritionix.NutritionixException"/> from an error message
+            </summary>
+        </member>
+        <member name="M:Nutritionix.NutritionixException.#ctor(Nutritionix.ErrorResponse)">
+            <summary>
+            Creates a new <see cref="T:Nutritionix.NutritionixException"/> from a error response
+            </summary>
+        </member>
+        <member name="P:Nutritionix.NutritionixException.Errors">
+            <summary>
+            The errors returned from the Nutritionix API
+            </summary>
+        </member>
+        <member name="T:Nutritionix.Item">
+            <summary>
+            Nutritionix item, e.g. USDA food, restaurant item or packaged food
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.Id">
+            <summary>
+            Item ID
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.Name">
+            <summary>
+            Name of the item
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.BrandId">
+            <summary>
+            Brand ID
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.BrandName">
+            <summary>
+            Name of the brand
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.UPC">
+            <summary>
+            UPC
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.Updated">
+            <summary>
+            Date the item was last updated in the Nutritionix database
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.Created">
+            <summary>
+            Date the item was added to the Nutritionix database
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.IngredientStatement">
+            <summary>
+            Ingredients
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_Calories">
+            <summary>
+            Total Calories
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_CaloriesFromFat">
+            <summary>
+            Calories from Fat (calculated)
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_TotalFat">
+            <summary>
+            Total Fat
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_SaturatedFat">
+            <summary>
+            Saturated Fat
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_TransFat">
+            <summary>
+            Trans Fat
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_PolyunsaturatedFat">
+            <summary>
+            Polyunsaturated Fat
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_MonounsaturatedFat">
+            <summary>
+            Monounsaturated Fat
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_Cholesterol">
+            <summary>
+            Cholesterol
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_Sodium">
+            <summary>
+            Sodium
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_TotalCarbohydrate">
+            <summary>
+            Total Carbohydrate
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_DietaryFiber">
+            <summary>
+            Dietary Fiber
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_Sugar">
+            <summary>
+            Sugar
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_Protein">
+            <summary>
+            Protein
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_VitaminA">
+            <summary>
+            Vitamin A (Daily Value %)
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_VitaminC">
+            <summary>
+            Vitamin C (Daily Value %)
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_Calcium">
+            <summary>
+            Calcium (Daily Value %)
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_Iron">
+            <summary>
+            Iron (Daily Value %)
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_ServingsPerContainer">
+            <summary>
+            Number of servings in a container
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_ServingSizeQuantity">
+            <summary>
+            Serving size quantity
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_ServingSizeUnit">
+            <summary>
+            Serving size unit
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.NutritionFact_ServingGramWeight">
+            <summary>
+            Weight of a serving in grams
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.Allergen_ContainsMilk">
+            <summary>
+            Flag specifying if the item is known to contain the allergen: Milk
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.Allergen_ContainsEggs">
+            <summary>
+            Flag specifying if the item is known to contain the allergen: Eggs
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.Allergen_ContainsFish">
+            <summary>
+            Flag specifying if the item is known to contain the allergen: Fish
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.Allergen_ContainsShellfish">
+            <summary>
+            Flag specifying if the item is known to contain the allergen: Shellfish
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.Allergen_ContainsTreeNuts">
+            <summary>
+            Flag specifying if the item is known to contain the allergen: Tree Nuts
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.Allergen_ContainsPeanuts">
+            <summary>
+            Flag specifying if the item is known to contain the allergen: Peanuts
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.Allergen_ContainsWheat">
+            <summary>
+            Flag specifying if the item is known to contain the allergen: Wheat
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.Allergen_ContainsSoy">
+            <summary>
+            Flag specifying if the item is known to contain the allergen: Soy
+            </summary>
+        </member>
+        <member name="P:Nutritionix.Item.Allergen_ContainsGluten">
+            <summary>
+            Flag specifying if the item is known to contain the allergen: Gluten
+            </summary>
+        </member>
+        <member name="T:Nutritionix.PowerSearchRequest">
+            <summary>
+            Request object for performing a power search against Nutritionix
+            </summary>
+        </member>
+        <member name="M:Nutritionix.PowerSearchRequest.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nutritionix.PowerSearchRequest.Query">
+            <summary>
+            A search term
+            </summary>
+        </member>
+        <member name="P:Nutritionix.PowerSearchRequest.Fields">
+            <summary>
+            List of properties that should be populated on the results
+            <example>Fields.Add(x => x.Calories)</example>
+            </summary>
+        </member>
+        <member name="P:Nutritionix.PowerSearchRequest.Count">
+            <summary>
+            Number of results to return
+            </summary>
+        </member>
+        <member name="P:Nutritionix.PowerSearchRequest.Start">
+            <summary>
+            The index of the first result to return. Allows for paging the results.
+            </summary>
+        </member>
+        <member name="P:Nutritionix.PowerSearchRequest.MinimumScore">
+            <summary>
+            Do not return results with a score below this threshold.
+            </summary>
+        </member>
+        <member name="P:Nutritionix.PowerSearchRequest.SortBy">
+            <summary>
+            Sort the results by the specified property
+            </summary>
+        </member>
+        <member name="P:Nutritionix.PowerSearchRequest.Filters">
+            <summary>
+            Filters applied to the search
+            </summary>
+        </member>
+        <member name="T:Nutritionix.SearchResultSort">
+            <summary>
+            Specifies how search results should be sorted
+            </summary>
+        </member>
+        <member name="M:Nutritionix.SearchResultSort.#ctor(System.Linq.Expressions.Expression{System.Func{Nutritionix.Item,System.Nullable{System.Decimal}}},Nutritionix.SortOrder)">
+            <summary>
+            Create a new <see cref="T:Nutritionix.SearchResultSort"/>. You may only sort by numeric properties.
+            </summary>
+            <param name="itemPropertyExpression">The numeric property by which to sort.</param>
+            <param name="order">The sort order</param>
+        </member>
+        <member name="F:Nutritionix.SearchResultSort.Field">
+            <summary>
+            The field on the search results by which the results should be sorted.
+            </summary>
+        </member>
+        <member name="F:Nutritionix.SearchResultSort.Order">
+            <summary>
+            The desired sort order.
+            </summary>
+        </member>
+        <member name="T:Nutritionix.SortOrder">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nutritionix.SortOrder.Ascending">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:Nutritionix.SortOrder.Descending">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nutritionix.ItemTypeFilter.Negated">
+            <summary>
+            Exclude the specified ItemType
+            </summary>
+        </member>
+        <member name="T:Nutritionix.SearchRequest">
+            <summary>
+            Request object for searching Nutritionix
+            </summary>
+        </member>
+        <member name="M:Nutritionix.SearchRequest.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchRequest.Query">
+            <summary>
+            A search term
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchRequest.BrandId">
+            <summary>
+            A brand ID
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchRequest.Count">
+            <summary>
+            Number of results to return
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchRequest.Start">
+            <summary>
+            The index of the first result to return. Allows for paging the results.
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchRequest.Fields">
+            <summary>
+            List of properties that should be populated on the results
+            <example>Fields.Add(x => x.Calories)</example>
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchRequest.ExcludeAllergens">
+            <summary>
+            List of <see cref="T:Nutritionix.Allergen"/>s which should be excluded from the results
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchRequest.IncludeAllFields">
+            <summary>
+            Include all available fields 
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchRequest.MinimumCalories">
+            <summary>
+            Only return items with at least this many calories
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchRequest.MaximumCalories">
+            <summary>
+            Only return items with at most this many calories
+            </summary>
+        </member>
+        <member name="T:Nutritionix.SearchResponse">
+            <summary>
+            Nutritionix Search Response
+            </summary>
+        </member>
+        <member name="M:Nutritionix.SearchResponse.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchResponse.TotalResults">
+            <summary>
+            The total number of matching results
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchResponse.MaxScore">
+            <summary>
+            The highest score in the results
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchResponse.Results">
+            <summary>
+            A page of matching results
+            </summary>
+        </member>
+        <member name="T:Nutritionix.SearchResult">
+            <summary>
+            Result returned from a Nutritionix search
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchResult.Id">
+            <summary>
+            Search result item id, equivalent to Item.ItemId
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchResult.Index">
+            <summary>
+            Search result index
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchResult.Type">
+            <summary>
+            Search result type
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchResult.Score">
+            <summary>
+            Search score
+            </summary>
+        </member>
+        <member name="P:Nutritionix.SearchResult.Item">
+            <summary>
+            Matching item
+            </summary>
+        </member>
+        <member name="T:Nutritionix.SearchResultFieldCollection">
+            <summary>
+            Collection of <see cref="T:Nutritionix.SearchResult"/> properties that should be populated in a search's results
+            </summary>
+        </member>
+        <member name="M:Nutritionix.SearchResultFieldCollection.Add(System.Linq.Expressions.Expression{System.Func{Nutritionix.Item,System.Object}})">
+            <summary>
+            Adds the specified field expression, converting the expression to the appropriate string reprentation.
+            </summary>
+            <param name="itemPropertyExpression">An expression representing the property on <see cref="T:Nutritionix.Item"/> that should be included.</param>
+        </member>
+        <member name="T:Nutritionix.Uris.PowerSearchUri">
+            <summary>
+            Builds a URI to power search the items in Nutritionix
+            </summary>
+        </member>
+        <member name="T:Nutritionix.Uris.NutritionixUri">
+            <summary>
+            Base class for building URIs for the Nutritionix API
+            </summary>
+        </member>
+        <member name="M:Nutritionix.Uris.PowerSearchUri.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nutritionix.Uris.SearchUri"/> class.
+            </summary>
+            <param name="appId">Your application id</param>
+            <param name="appKey">Your application key</param>
+        </member>
+        <member name="T:Nutritionix.Uris.RetrieveItemUri">
+            <summary>
+            Builds a URI to retrieve an item from Nutritionix
+            </summary>
+        </member>
+        <member name="T:Nutritionix.Uris.SearchUri">
+            <summary>
+            Builds a URI to search the items in Nutritionix
+            </summary>
+        </member>
+        <member name="M:Nutritionix.Uris.SearchUri.#ctor(System.String,System.String,Nutritionix.SearchRequest)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Nutritionix.Uris.SearchUri"/> class.
+            </summary>
+            <param name="appId">Your application id</param>
+            <param name="appKey">Your application key</param>
+            <param name="request">The search request</param>
+        </member>
+    </members>
+</doc>
