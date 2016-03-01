@@ -5,8 +5,6 @@ Mobile App for Android. Allows users to scan in food items by UPC, store items i
 #### Running ProteinHelper
 To run ProteinHelper:
   1. Download com.tim.proteintracker.apk
-  2. Drop onto device
-  3. Install
   
   ####OR
   1. Clone repository
