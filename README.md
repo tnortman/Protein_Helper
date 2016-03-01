@@ -7,7 +7,6 @@ Mobile App for Android. Allows users to scan in food items by UPC, store items i
   1. Clone/Download repository
   2. Download com.tim.proteintracker.apk
   3. Drop com.tim.proteintracker.apk onto your Android Device
-  3. Drop com.tim.proteintracker.apk onto your Android Device
   
   **or**
 
