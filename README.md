@@ -8,9 +8,8 @@ To run ProteinHelper:
   2. Drop onto device
   3. Install
   
-  OR
-
+  ####OR
   1. Clone repository
   2. Open ProteinHelper.sln in Xamarin Studio, Visual Studio, etc.
-  3. Build and Run
+  3. Build and run
 
