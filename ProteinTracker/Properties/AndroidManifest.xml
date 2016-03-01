@@ -6,5 +6,5 @@
 	<uses-permission android:name="android.permission.READ_OWNER_DATA" />
 	<uses-permission android:name="android.permission.WRITE_OWNER_DATA" />
 	<uses-permission android:name="android.permission.CAMERA" />
-	<application android:allowBackup="true" android:icon="@drawable/proteinTracker_logo" android:label="@string/app_name"></application>
+	<application android:allowBackup="true" android:icon="@drawable/ic_proteinlogo" android:label="@string/app_name"></application>
 </manifest>

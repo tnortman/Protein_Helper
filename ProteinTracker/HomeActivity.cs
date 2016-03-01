@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProteinHelper
 {
-	[Activity (Label = "Protein Tracker", Icon = "@drawable/proteinTracker_logo")]
+	[Activity (Label = "Protein Tracker", Icon = "@drawable/ic_proteinLogo")]
 	public class HomeActivity : Activity
 	{
-		
-
 		protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -28,11 +26,5 @@ namespace ProteinHelper
 			};
 				
 		}
-
-
-
-
-
-
 	}
 }

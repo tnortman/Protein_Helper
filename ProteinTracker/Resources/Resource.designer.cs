@@ -26,7 +26,6 @@ namespace ProteinHelper
 		
 		public static void UpdateIdValues()
 		{
-			global::ModernHttpClient.Resource.String.library_name = global::ProteinHelper.Resource.String.library_name;
 			global::ZXing.Mobile.Resource.Id.contentFrame = global::ProteinHelper.Resource.Id.contentFrame;
 			global::ZXing.Mobile.Resource.Layout.zxingscanneractivitylayout = global::ProteinHelper.Resource.Layout.zxingscanneractivitylayout;
 			global::ZXing.Mobile.Resource.Layout.zxingscannerfragmentlayout = global::ProteinHelper.Resource.Layout.zxingscannerfragmentlayout;
@@ -79,25 +78,34 @@ namespace ProteinHelper
 			public const int ic_myInventory = 2130837513;
 			
 			// aapt resource value: 0x7f02000a
-			public const int ic_refresh = 2130837514;
+			public const int ic_proteinLogo = 2130837514;
 			
 			// aapt resource value: 0x7f02000b
-			public const int ic_save = 2130837515;
+			public const int ic_refresh = 2130837515;
 			
 			// aapt resource value: 0x7f02000c
-			public const int ic_scan = 2130837516;
+			public const int ic_save = 2130837516;
 			
 			// aapt resource value: 0x7f02000d
-			public const int ic_search = 2130837517;
+			public const int ic_scan = 2130837517;
 			
 			// aapt resource value: 0x7f02000e
-			public const int ic_searchButton = 2130837518;
+			public const int ic_search = 2130837518;
 			
 			// aapt resource value: 0x7f02000f
-			public const int proteinTracker_logo = 2130837519;
+			public const int ic_searchButton = 2130837519;
 			
 			// aapt resource value: 0x7f020010
-			public const int SplashScreen = 2130837520;
+			public const int proteinTracker_logo = 2130837520;
+			
+			// aapt resource value: 0x7f020011
+			public const int splashbg = 2130837521;
+			
+			// aapt resource value: 0x7f020012
+			public const int splashbg_reduced = 2130837522;
+			
+			// aapt resource value: 0x7f020013
+			public const int SplashScreen = 2130837523;
 			
 			static Drawable()
 			{
@@ -341,14 +349,11 @@ namespace ProteinHelper
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f050002
-			public const int app_name = 2131034114;
-			
 			// aapt resource value: 0x7f050001
-			public const int hello = 2131034113;
+			public const int app_name = 2131034113;
 			
 			// aapt resource value: 0x7f050000
-			public const int library_name = 2131034112;
+			public const int hello = 2131034112;
 			
 			static String()
 			{
