@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using SQLite;
 using System.Threading.Tasks;
-
+using System.Linq;
 
 namespace ProteinHelper
 {
@@ -18,7 +18,7 @@ namespace ProteinHelper
 			this.storagePath = storagePath;
 
 			//Initiate our DB
-			Task initializeDB = Task.Factory.StartNew(()=> initConnectionToDB());
+			Task initializeDB = Task.Run(()=> initConnectionToDB());
 			initializeDB.Wait ();
 		}
 
@@ -131,15 +131,22 @@ namespace ProteinHelper
 		{
 			inventory.Clear ();
 
-			var conn = new SQLiteAsyncConnection (storagePath);
-			conn.Table<FoodItem> ().ToListAsync ().ContinueWith ((t) => {
-				if(t.Result.Count != 0)
-				{
-					foreach (var foodItem in t.Result) {
-						inventory.Add (foodItem);
-					}
-				}
-			});
+			var conn = new SQLiteConnection (storagePath);
+			List<FoodItem> newCache = conn.Table<FoodItem> ().OrderBy(fi=>fi.protein).ToList<FoodItem> ();
+
+			foreach (FoodItem foodItem in newCache) {
+				inventory.Add (foodItem);
+			}
+
+//			var conn = new SQLiteAsyncConnection (storagePath);
+//			conn.Table<FoodItem> ().ToListAsync ().ContinueWith ((t) => {
+//				if(t.Result.Count != 0)
+//				{
+//					foreach (var foodItem in t.Result) {
+//						inventory.Add (foodItem);
+//					}
+//				}
+//			});
 		}
 	
 		public int GetMaxProteinInInventory()
@@ -151,6 +158,16 @@ namespace ProteinHelper
 					maxPrtn =(int) f.protein;
 			}
 			return maxPrtn;
+		}
+
+		public bool matchingFoodItemByProductName(string productName)
+		{
+			foreach (FoodItem f in inventory) {
+				if (f.productName.Equals (productName)) {
+					return true;
+				}
+			}
+			return false;
 		}
 
 

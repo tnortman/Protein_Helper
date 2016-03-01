@@ -29,16 +29,15 @@ namespace ProteinHelper
 		InventoryAdapter inventoryAdapter;
 		MyTouchListener swipeDetector;
 		TextView emptyView;
-	
+		//ProgressDialog nutriProgDialog;
 
 		protected override void OnCreate (Bundle savedInstanceState)
 		{
 			base.OnCreate (savedInstanceState);
-
 			SetContentView (Resource.Layout.Inventory);
 
 			//Refresh cache of foodItems before we layout with adapter
-			Task refreshCache = Task.Factory.StartNew(()=> Inventory.InventoryService.RefreshCache());
+			Task refreshCache = Task.Run(()=> Inventory.InventoryService.RefreshCache());
 			refreshCache.Wait ();
 
 			swipeDetector = new MyTouchListener ();
@@ -49,6 +48,7 @@ namespace ProteinHelper
 			inventoryAdapter = new InventoryAdapter (this);
 			inventoryListView.Adapter = inventoryAdapter;
 			inventoryListView.EmptyView = emptyView;
+
 
 			inventoryListView.SetOnTouchListener (swipeDetector);
 
@@ -88,18 +88,21 @@ namespace ProteinHelper
 		 * */
 		protected async void ScanBarcode()
 		{
-			
 			var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+			scanner.TopText = "Center barcode on scanning line";
+			scanner.CancelButtonText = "Cancel";
 			var options = new ZXing.Mobile.MobileBarcodeScanningOptions ();
+
+			//We don't need to worry about qr codes or any other barcode formats besides UPC_A (and mayber UPC_E)
 			options.PossibleFormats = new List<ZXing.BarcodeFormat> (){ 
-				ZXing.BarcodeFormat.UPC_A
+				ZXing.BarcodeFormat.UPC_A,
+				ZXing.BarcodeFormat.UPC_E
 			};
 			var result = await scanner.Scan (options);
 
 			if (result != null) {
 
 				Console.WriteLine ("Scanned Barcode: " + result.Text);
-
 				NutritionixService nutService = new NutritionixService ();
 				Item foodItem = nutService.SearchByUPC (result.Text);
 				if (foodItem != null) {
@@ -134,12 +137,9 @@ namespace ProteinHelper
 				foodItemToAdd.GenerateUPC ();
 			Inventory.InventoryService.insertUpdateFoodItem(foodItemToAdd);
 
-			//Refresh inventoryAdapter
-			Inventory.InventoryService.RefreshCache ();
+			RefreshCache ();
 
-			inventoryAdapter.NotifyDataSetChanged ();
-
-			Toast.MakeText (this, "Item added to inventory", ToastLength.Short).Show();
+			Toast.MakeText (this, tempName + " added to inventory", ToastLength.Short).Show();
 		}
 
 		protected void AddScaned(Item foodItem)
@@ -148,8 +148,19 @@ namespace ProteinHelper
 			alert.SetCancelable (false);
 
 			long scannedUPC = Convert.ToInt64 (foodItem.UPC);
-			//Handles a new UPC that can be added to the inventory
-			if(!Inventory.InventoryService.matchingUPC(scannedUPC) || scannedUPC.Equals(null))
+
+			//If we find a UPC or product name that already exists in the inventory
+			if (Inventory.InventoryService.matchingUPC (scannedUPC) ||
+			   Inventory.InventoryService.matchingFoodItemByProductName (foodItem.Name)) 
+			{
+				alert.SetTitle ("Item found");
+				alert.SetNeutralButton ("OK", delegate {});
+				alert.SetMessage (String.Format("Your inventory already contains {0} item", foodItem.Name));
+				alert.Show ();
+			}
+
+			//If we dont find any matches in the inventory, we can add it
+			else
 			{
 				alert.SetTitle ("Item found");
 				alert.SetPositiveButton ("Add", (senderAlert, args)=>{
@@ -157,14 +168,6 @@ namespace ProteinHelper
 				});
 				alert.SetNegativeButton ("Cancel", delegate {});
 				alert.SetMessage (String.Format("Product: {0}\nBrand Name: {1}", foodItem.Name, foodItem.BrandName));
-				alert.Show ();
-			}
-			//Handles an already existing UPC in the inventory
-			else
-			{
-				alert.SetTitle ("Item found");
-				alert.SetNeutralButton ("OK", delegate {});
-				alert.SetMessage (String.Format("Your inventory already contains {0} item", foodItem.Name));
 				alert.Show ();
 			}
 		}
@@ -197,7 +200,6 @@ namespace ProteinHelper
 					deleteAnimation.AddAnimation (translateAnim);
 					deleteAnimation.Duration = 250;
 					deleteAnimation.SetAnimationListener(new MyAnimationListener(inventoryAdapter, e.Position));
-
 
 					inventoryListView.GetChildAt (indexToBeDeleted).StartAnimation (deleteAnimation);
 
@@ -251,14 +253,14 @@ namespace ProteinHelper
 
 					//The actual delete happens in the animation listener, it waits for the animation to be done b4 deleting}
 					Toast.MakeText(this, Inventory.InventoryService.GetFoodItemByUPC(e.Id).productName + " Deleted" ,ToastLength.Short).Show();
-			} 
-			//else we send user to the detail food item screen
+				} 
+				//else we send user to the detail food item screen
 				else{
-				Intent foodItemDetailIntent = new Intent (this, typeof(FoodItemDetail));
-				//long UPC = Inventory.InventoryService.GetFoodItemByPosition ((int)e.Id).UPC.Value;
-				foodItemDetailIntent.PutExtra ("UPC", e.Id);
-				StartActivity (foodItemDetailIntent);
-			}
+					Intent foodItemDetailIntent = new Intent (this, typeof(FoodItemDetail));
+					//long UPC = Inventory.InventoryService.GetFoodItemByPosition ((int)e.Id).UPC.Value;
+					foodItemDetailIntent.PutExtra ("UPC", e.Id);
+					StartActivity (foodItemDetailIntent);
+				}
 			}
 		}
 
@@ -268,18 +270,14 @@ namespace ProteinHelper
 			base.OnResume ();
 			RefreshCache ();
 		}
-
+			
 		protected void RefreshCache()
 		{
-			Task refreshCache = Task.Factory.StartNew(()=>Inventory.InventoryService.RefreshCache ());
+			//Makes sure to refresh cache and wait b4 updating, else we will get an empty cache or previous version
+			Task refreshCache = Task.Run(()=>Inventory.InventoryService.RefreshCache ());
 			refreshCache.Wait ();
 			inventoryAdapter.NotifyDataSetChanged ();
 		}
-
-//		public override void OnContentChanged()
-//		{
-//			RefreshCache ();
-//		}
 	}
 
 	public class MyAnimationListener: Java.Lang.Object, Android.Views.Animations.Animation.IAnimationListener

@@ -14,6 +14,7 @@ namespace ProteinHelper
 		{
 			base.OnCreate(bundle);
 			StartActivity(typeof(HomeActivity));
+			this.Finish ();
 		}
 	}
 }
